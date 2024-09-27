@@ -1,3 +1,6 @@
+# Author: Robert Depweg
+# Class: CIS226
+# Date: 9/26/24
 """Program code"""
 
 # First-party imports
