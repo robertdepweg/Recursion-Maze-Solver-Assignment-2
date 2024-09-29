@@ -15,8 +15,6 @@ def main(*args):
     Y_START = 1
 
     # The first maze that needs to be solved.
-    # NOTE: You may want to make a smaller version to test and debug with.
-    # You don't have to, but it might make your life easier.
     maze1 = [
         ["#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#", "#"],
         ["#", ".", ".", ".", "#", ".", ".", ".", ".", ".", ".", "#"],
@@ -59,12 +57,17 @@ def transpose_maze(maze_to_transpose):
     2, 5, 8
     3, 6, 9
 
-    The current return statement is just a placeholder so the program doesn't
-    contain any syntax errors. You need to replace this with the work you need
-    to do for actually transposing the maze.
-
     It is important that you make a new 2d list and copy each element from the
     original to the new transposed one. Failure to do so may lead you to only
     be able to solve the transposed one.
     """
-    return []
+    new_maze = [
+    [], [], [], [], [], [], [], [], [], [], [], []
+    ]
+    for maze_x_coordnate, list_of_list_num in enumerate(maze_to_transpose):
+        for maze_y_coordnate, value in enumerate(list_of_list_num):
+            if maze_x_coordnate == maze_y_coordnate:
+                new_maze[maze_x_coordnate][maze_y_coordnate] = value
+            else:
+                new_maze[(len(list_of_list_num) - 1) - maze_x_coordnate][(len(maze_to_transpose) - 1) - maze_y_coordnate] = value
+    return new_maze

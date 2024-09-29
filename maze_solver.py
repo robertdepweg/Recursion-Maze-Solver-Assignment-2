@@ -1,8 +1,10 @@
 # Author: Robert Depweg
 # Class: CIS226
-# Date: 9/24/24
+# Date: 9/28/24
 """Maze Solver Module"""
 
+# First-party imports
+from colors import print_o, print_x
 
 class MazeSolver:
     """This class is used for solving a 2d list maze.
@@ -14,72 +16,59 @@ class MazeSolver:
     def __init__(self):
         """Constructor for MazeSolver"""
 
-        # NOTE: Though not required, you may want to define some class level
-        # variables here that you are able to access and set anywhere during
-        # recursion. This is why the init constructor is defined here for you.
-        # Holds exit coordnates
-        self.X_EXIT = 5
-        self.Y_EXIT = 11
+        # Bool for finish status
+        self.finish_flag = False
 
     def solve_maze(self, maze, x_start, y_start):
-        """This is the public method that will allow someone to use this class to solve the maze.
-        Feel free to change the return type, or add more parameters if you like.
-        But, it can be done exactly as it is here without adding anything other
-        than code in the body."""
+        """Public method that calls private maze solving method"""
 
         # Holds current coordnates
         current_x = x_start
         current_y = y_start
 
-        # Keeps method going until maze solved
-        finish_bool = False
+        # The maze solver
+        self._maze_traversal(maze, current_x, current_y)
 
-        while finish_bool == False:
-            finish_bool = self._maze_traversal(maze, current_x, current_y)
-
+        print()
         print("First maze is finished!")
 
     def _maze_traversal(self, maze, current_x, current_y):
-        """This should be the recursive method that gets called to solve the maze.
-        Feel free to have it return something if you would like. But, it can be
-        done without having it return anything. Also feel free to change the
-        signature to take in parameters that you might need.
+        """Traverses the maze by recursion"""
 
-        This is only a very small starting point.
-        More than likely you will need to pass in at a minimum the current position
-        in X and Y maze coordinates. EX: _maze_traversal(current_x, current_y)"""
-
-        # Check current position to see if exit reached
-        if current_x == self.X_EXIT and current_y == self.Y_EXIT:
-            self.print_maze(maze)
-            return True
         # Changes period to X if need be
-        elif maze[current_x][current_y] == '.':
+        if maze[current_x][current_y] == '.':
             maze[current_x][current_y] = 'X'
+            # Calls seperate function to print the maze
+            self.print_maze(maze)
+            
+        # Base case: checks current position to see if exit reached
+        if (current_x + 1) == len(maze) or (current_y + 1) == len(maze):
+            self.finish_flag = True
+
         # Check down
-        elif maze[current_x + 1][current_y] == '.':
+        if maze[current_x + 1][current_y] == '.' and self.finish_flag != True:
             self._maze_traversal(maze, current_x + 1, current_y)
         # Check up
-        elif maze[current_x - 1][current_y] == '.':
+        if maze[current_x - 1][current_y] == '.' and self.finish_flag != True:
             self._maze_traversal(maze, current_x - 1, current_y)
         # Check left
-        elif maze[current_x][current_y-1] == '.':
+        if maze[current_x][current_y - 1] == '.' and self.finish_flag != True:
             self._maze_traversal(maze, current_x, current_y - 1)
         # Check right
-        elif maze[current_x][current_y + 1] == '.':
+        if maze[current_x][current_y + 1] == '.' and self.finish_flag != True:
             self._maze_traversal(maze, current_x, current_y + 1)
-        # Changes to O if at dead end
-        else:
-            maze[current_x][current_y] = 'O'
-            self._maze_traversal(maze, current_x, current_y)
-
+        # Changes to O if at dead end or wrong path
+        maze[current_x][current_y] = 'O'
         self.print_maze(maze)
-
-        return False
-    
+        
     def print_maze(self, maze):
         """Prints the maze for each step taken"""
         for y in maze:
             print()
-            for symbols in y:
-                print(symbols, end=" ")
+            for symbol in y:
+                if symbol == 'X':
+                    print_x(symbol)
+                elif symbol == 'O':
+                    print_o(symbol)
+                else:
+                    print(symbol, end=" ")
