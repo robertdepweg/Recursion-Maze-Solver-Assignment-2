@@ -56,7 +56,8 @@ Don't forget that you must have a base case for your recursive method or you wil
 
 ## Outside Resources Used
 
-
+Valuable information on how to create a transposed, two-dimentional maze.
+https://www.geeksforgeeks.org/python-transpose-elements-of-two-dimensional-list/ 
 
 ## Known Problems, Issues, And/Or Errors in the Program
 
