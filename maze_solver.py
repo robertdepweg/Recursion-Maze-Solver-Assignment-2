@@ -11,7 +11,9 @@ class MazeSolver:
 
     def __init__(self):
         """Constructor for MazeSolver"""
-        # Bool for finish status
+        # Bool for finish status. When marked True, all if
+        # statements in _maze_traversal will be skipped, and
+        # maze will be exited shortly.
         self.finish_flag = False
 
     def solve_maze(self, maze, x_start, y_start):
