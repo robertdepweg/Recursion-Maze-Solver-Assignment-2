@@ -39,7 +39,7 @@ class Style:
         print(value, end="")
         return value
 
-    
+
 def print_x(message):
     """Prints red X in maze output"""
     Style.GREEN  # pylint:disable=W0104
