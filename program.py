@@ -55,7 +55,7 @@ def transpose_maze(maze_to_transpose):
         # New row to be placed in new_maze
         new_maze_row = []
         for item in maze_to_transpose:
-            # Places each new item to 
+            # Places each new item in corresponding maze row
             new_maze_row.append(item[row_num])
         # Adds new list to new maze
         new_maze.append(new_maze_row)
